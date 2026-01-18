@@ -5,7 +5,7 @@ const {
   getAllLaunches,
   getLaunch,
   deleteLaunch,
-} = require("../controllers/launchController");
+} = require("../controllers/launch.controller");
 
 // Note: These routes require authentication middleware (will be added)
 // For now, they will use req.user.id from the middleware
