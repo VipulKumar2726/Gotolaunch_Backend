@@ -41,6 +41,8 @@ app.use("/api/launch", protect, launchRoutes); // Launch routes require authenti
 app.use("/api/checklist", protect, checklistRoutes); // Checklist routes require authentication
 app.use("/api/reminder", protect, reminderRoutes); // Reminder routes require authentication
 
+app.use("/api/payment", require("./routes/payment.routes"));
+
 module.exports = app;
 
 

@@ -2,6 +2,7 @@ const Launch = require("../models/Launch");
 const User = require("../models/User");
 const AppError = require("../utils/AppError");
 const checklistService = require("./checklist.service");
+const { ALLOW_FREE_LAUNCHES, FREE_LAUNCH_LIMIT } = require("../config/feature");
 
 class LaunchService {
   // Create Launch
@@ -22,9 +23,27 @@ class LaunchService {
     }
 
     // Business rule: Paid users only
-    if (user.plan !== "paid") {
-      throw new AppError("Only paid users can create launches", 403);
-    }
+    // if (user.plan !== "paid") {
+    //   throw new AppError("Only paid users can create launches", 403);
+    // }
+
+
+    // 🧠 Check plan + feature flag
+if (user.plan !== "paid") {
+  if (!ALLOW_FREE_LAUNCHES) {
+    throw new AppError("Only paid users can create launches", 403);
+  }
+
+  // ✅ Free users allowed → check limit
+  const launchCount = await Launch.countDocuments({ userId });
+
+  if (launchCount >= FREE_LAUNCH_LIMIT) {
+    throw new AppError(
+      `Free users can only create ${FREE_LAUNCH_LIMIT} launches. Upgrade to paid.`,
+      403
+    );
+  }
+}
 
     const launch = await Launch.create({
       userId,
