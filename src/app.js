@@ -9,6 +9,7 @@ const authRoutes = require("./routes/authRoutes");
 const launchRoutes = require("./routes/launchRoutes");
 const checklistRoutes = require("./routes/checklistRoutes");
 const reminderRoutes = require("./routes/reminderRoutes");
+const paymentRoutes = require("./routes/payment.routes");
 
 // Import middleware
 const { protect } = require("./middleware/auth.middleware");
@@ -41,7 +42,7 @@ app.use("/api/launch", protect, launchRoutes); // Launch routes require authenti
 app.use("/api/checklist", protect, checklistRoutes); // Checklist routes require authentication
 app.use("/api/reminder", protect, reminderRoutes); // Reminder routes require authentication
 
-app.use("/api/payment", require("./routes/payment.routes"));
+app.use("/api/payment", paymentRoutes); 
 
 module.exports = app;
 

@@ -20,7 +20,7 @@ exports.createLaunch = async (req, res, next) => {
 exports.getAllLaunches = async (req, res, next) => {
   try {
     const launches = await LaunchService.getAllLaunches(req.user.id);
-
+console.log("🚀 Retrieved launches for user:", launches);
     res.status(200).json({
       success: true,
       count: launches.length,
@@ -33,11 +33,13 @@ exports.getAllLaunches = async (req, res, next) => {
 
 exports.getLaunch = async (req, res, next) => {
   try {
+console.log(req.params, req.user)
+
     const launch = await LaunchService.getLaunchById(
       req.user.id,
       req.params.id
     );
-
+    console.log("🚀 Retrieved launch for user:", launch);
     res.status(200).json({
       success: true,
       launch: formatLaunch(launch),

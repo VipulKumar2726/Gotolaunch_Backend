@@ -75,7 +75,7 @@ if (user.plan !== "paid") {
   // Get single launch (ownership check)
   static async getLaunchById(userId, launchId) {
     const launch = await Launch.findById(launchId);
-
+console.error("Failed to auto-generate checklist:", launch);
     if (!launch) {
       throw new AppError("Launch not found", 404);
     }
