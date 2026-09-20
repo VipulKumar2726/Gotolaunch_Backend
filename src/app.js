@@ -21,7 +21,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://your-site.netlify.app",
+      "https://gotolaunch.netlify.app/",
     ],
     credentials: true,
   })
