@@ -20,7 +20,6 @@ const { initReminderCron } = require("./services/cron.service");
 app.use(
   cors({
     origin: [
-      "http://localhost:5173",
       "https://gotolaunch.netlify.app",
     ],
     credentials: true,
